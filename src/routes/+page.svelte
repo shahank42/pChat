@@ -11,10 +11,12 @@
   		]
 	});
 
-	const ROOM_ID_DEV = "room3";
+	const ROOM_ID_DEV = "room4";
 
 	let currentMessage = '';
 	let messages: any = [];
+	let nickname: String = "";
+
 
 	gun.get(ROOM_ID_DEV).map().once((message, key) => {
 		if (message) {
@@ -22,22 +24,28 @@
 		}
 	});
 
+
 	const sendMessage = () => {
-		const messageRef = gun.get(ROOM_ID_DEV);
+		const messageGunRef = gun.get(ROOM_ID_DEV);
 		let timestamp = Date.now();
 		let newMessage = {
 			id: timestamp,
-			sender: "shahank",
+			sender: nickname,
 			content: currentMessage,
 			timestamp: timestamp,
 		}
-		messageRef.set(newMessage);
+		messageGunRef.set(newMessage);
+		currentMessage = "";
 	}
 </script>
 
 <div class="container h-full mx-auto flex flex-col justify-center items-center">
-	<div class="space-y-5">
-		<p>Room ID: {ROOM_ID_DEV}</p>
+	<div class="mx-auto flex flex-row align-middle">
+		Room ID: {ROOM_ID_DEV}
+	</div>
+
+	<div class="mx-auto flex flex-row">
+		Nickname: <input class="input w-1/2 p-4 ml-2 mb-2 h-10" type="text" placeholder="default: shahank" bind:value={nickname}/>
 	</div>
 
 	<div class="h-full flex flex-col gap-1 w-full">
