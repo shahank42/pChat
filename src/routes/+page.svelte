@@ -3,8 +3,6 @@
 	import { onMount } from "svelte";
 	import MessageFeed from "../components/MessageFeed.svelte";
 
-	
-
 	// import { gun } from "../initGun.js";
 	import Gun from "gun/gun";
 	const gun = Gun({
@@ -13,17 +11,19 @@
   		]
 	});
 
+	const ROOM_ID_DEV = "room3";
+
 	let currentMessage = '';
 	let messages: any = [];
 
-	gun.get("room0").map().on((message, key) => {
+	gun.get(ROOM_ID_DEV).map().once((message, key) => {
 		if (message) {
 			messages = [...messages, message];
 		}
 	});
 
 	const sendMessage = () => {
-		const messageRef = gun.get("room0");
+		const messageRef = gun.get(ROOM_ID_DEV);
 		let timestamp = Date.now();
 		let newMessage = {
 			id: timestamp,
@@ -37,7 +37,7 @@
 
 <div class="container h-full mx-auto flex flex-col justify-center items-center">
 	<div class="space-y-5">
-		<p>Room ID: room0</p>
+		<p>Room ID: {ROOM_ID_DEV}</p>
 	</div>
 
 	<div class="h-full flex flex-col gap-1 w-full">
