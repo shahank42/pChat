@@ -7,7 +7,7 @@
 
 	// import { gun } from "../initGun.js";
 	import Gun from "gun/gun";
-	const gun = Gun();
+	const gun = Gun('http://gun-manhattan.herokuapp.com/gun');
 
 	let currentMessage = '';
 	let messages: any = [];
