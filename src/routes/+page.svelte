@@ -9,8 +9,7 @@
 	import Gun from "gun/gun";
 	const gun = Gun({
   		peers: [
-    		"https://gun-manhattan.herokuapp.com/gun",
-    		"https://gunjs-mtl.herokuapp.com/gun"
+    		"https://pchat-relay-test.shahank.repl.co/gun",
   		]
 	});
 
