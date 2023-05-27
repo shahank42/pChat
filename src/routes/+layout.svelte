@@ -5,17 +5,12 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-
-	import { AppShell } from '@skeletonlabs/skeleton';
-
 </script>
 
-<AppShell>
-	<svelte:fragment slot="header">pChat</svelte:fragment>
-
-	<!-- Router Slot -->
+<div class="flex flex-col h-screen overflow-hidden">
+    <header class="w-full text-center border-b border-grey p-4">pChat</header>
 	<slot />
-	<!-- ---- / ---- -->
-
-	<svelte:fragment slot="pageFooter">made by shahank</svelte:fragment>
-</AppShell>
+    <footer class="w-full text-center border-t border-grey p-1">
+		<p class="text-sm">made by shahank</p>
+	</footer>
+</div>

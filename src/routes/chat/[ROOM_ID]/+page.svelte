@@ -1,35 +1,30 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
-	interface PageData {
-		id: string;
-	};
-
-	interface Message {
-		id: number;
-		sender: string;
-		content: string;
-		timestamp: number;
-	}
+	import type { Message, PageData } from "../../../types/types";
 
 	export let data: PageData;
 
+	import { afterUpdate } from "svelte";
 	import Gun from "gun/gun";
-	import MessageFeed from "../../../components/MessageFeed.svelte";
 	import { nickname } from "../../../lib/stores/userStore";
+	import MessageFeed from "../../../components/MessageFeed.svelte";
+	import MessagePrompt from "../../../components/MessagePrompt.svelte";
+	import NicknamePrompt from "../../../components/NicknamePrompt.svelte";
 
 	let showChatInterface: boolean = ($nickname !== "");
-
-	const gun = Gun({
-  		peers: [
-    		"https://pchat-relay-test.shahank.repl.co/gun",
-  		]
-	});
-
-	let ROOM_ID_DEV: string | null = data.id;
-	const messageGunRef = gun.get(ROOM_ID_DEV);
-
-	let currentMessage = '';
 	let messages: Message[] = [];
+	let messageScrollNode: HTMLElement;
+	let roomID: string | null = data.id;
+
+	const toggleChatInterface = () => { showChatInterface = true; }
+	
+	const gun = Gun({
+		peers: [
+			"https://pchat-relay-test.shahank.repl.co/gun",
+		]
+	});
+	
+	const messageGunRef = gun.get(roomID);
 
 	messageGunRef.map().once((message: any) => {
 		if (message) {
@@ -37,56 +32,23 @@
 		}
 	});
 
-
-	const sendMessage = () => {
-		let timestamp = Date.now();
-		let newMessage: Message = {
-			id: timestamp,
-			sender: $nickname,
-			content: currentMessage,
-			timestamp: timestamp,
-		}
-		messageGunRef.set(newMessage);
-		currentMessage = "";
-	}
+    afterUpdate(() => {
+        if (messages) messageScrollNode.scroll({ top: messageScrollNode.scrollHeight, behavior: 'smooth' });
+    });
 </script>
 
-<div class="container h-full mx-auto flex flex-col justify-center items-center">
-	<div class="mx-auto flex flex-row align-middle">
-		{ROOM_ID_DEV}
-	</div>
-
+<main class="flex-1 flex flex-col overflow-y-scroll" bind:this={messageScrollNode}>
 	{#if !showChatInterface}
-		<div class="container h-full mx-auto flex flex-col justify-center items-center">	
-			<label class="label w-3/4 md:w-1/2">
-				<span>Choose a nickname:</span>
-				<input class="input w-full p-4 h-10" type="text" placeholder="Choose nickname..." bind:value={$nickname}/>
-			</label>
-
-			<button class="btn variant-filled w-3/4 md:w-1/2 mt-5" on:click={() => { showChatInterface = true; }}>Join pChat Room</button>
-		</div>
+		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
 
 	{#if showChatInterface}
-		<div class="h-full flex flex-col gap-1 w-full">
-			<div class="bg-surface-500/30 p-4 overflow-y-auto h-full">
-				<MessageFeed messages={messages} />
-			</div>
-
-			<div class="bg-surface-500/30 p-4">
-				<div class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
-					<button class="input-group-shim">+</button>
-					<textarea
-						bind:value={currentMessage}
-						class="bg-transparent border-0 ring-0 p-2"
-						name="prompt"
-						id="prompt"
-						placeholder="Write your thoughts and make it public!..."
-						rows="3"
-					/>
-					<button class="variant-filled-primary" on:click={sendMessage}>Send</button>
-				</div>
-			</div>
+		<div class="bg-surface-500/30 p-4 flex-1">
+			<MessageFeed {messages} />
 		</div>
 	{/if}
-</div>
+</main>
+	
+{#if showChatInterface}
+	<MessagePrompt {messageGunRef} />
+{/if}
