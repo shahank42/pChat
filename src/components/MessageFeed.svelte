@@ -10,7 +10,7 @@
     });
 </script>
 
-<section class="w-full max-h-[550px] p-4 overflow-y-auto space-y-4" bind:this={messageScrollNode}>
+<section class="w-full max-h-[550px] p-4 overflow-y-auto" bind:this={messageScrollNode}>
     {#each messages as message}
         <div>
             <strong>{message.sender}:</strong> {message.content}

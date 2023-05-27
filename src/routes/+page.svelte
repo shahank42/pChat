@@ -9,5 +9,5 @@
 		<input class="input w-full p-4 h-10" type="text" placeholder="Choose nickname..." bind:value={$nickname}/>
 	</label>
 	
-	<a href={`/chat/room7`} class="btn variant-filled w-3/4 md:w-1/2 mt-5">Create pChat Room</a>
+	<a href={`/chat/${crypto.randomUUID()}`} class="btn variant-filled w-3/4 md:w-1/2 mt-5">Create pChat Room</a>
 </div>
