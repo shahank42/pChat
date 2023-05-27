@@ -37,7 +37,7 @@
     });
 </script>
 
-<main class="flex-1 flex flex-col overflow-y-scroll" bind:this={messageScrollNode}>
+<main class="flex-1 flex flex-col overflow-y-scroll md:w-3/4 md:mx-auto" bind:this={messageScrollNode}>
 	{#if !showChatInterface}
 		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
