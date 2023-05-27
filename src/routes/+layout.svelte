@@ -7,7 +7,7 @@
 	import '../app.postcss';
 </script>
 
-<div class="flex flex-col h-screen overflow-hidden">
+<div class="flex flex-col h-[100dvh] overflow-hidden">
     <header class="w-full text-center border-b border-grey p-4">pChat</header>
 	<slot />
     <footer class="w-full text-center border-t border-grey p-1">
