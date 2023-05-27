@@ -7,12 +7,12 @@
     let currentMessage: string = "";
 
     const sendMessage = () => {
-		let timestamp = Date.now();
+        const date = new Date();
 		let newMessage: Message = {
-			id: timestamp,
+			id: date.toISOString(),
 			sender: $nickname,
 			content: currentMessage,
-			timestamp: timestamp,
+			timestamp: `${date.toDateString()} | ${date.toTimeString().slice(0, 8)}`,
 		}
 		messageGunRef.set(newMessage);
 		currentMessage = "";

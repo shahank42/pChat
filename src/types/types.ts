@@ -1,8 +1,8 @@
 export interface Message {
-    id: number;
+    id: string;
     sender: string;
     content: string;
-    timestamp: number;
+    timestamp: string;
 }
 
 export interface PageData {
