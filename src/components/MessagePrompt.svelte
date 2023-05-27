@@ -12,7 +12,7 @@
 			id: date.toISOString(),
 			sender: $nickname,
 			content: currentMessage,
-			timestamp: `${date.toDateString()} | ${date.toTimeString().slice(0, 8)}`,
+			timestamp: `${date.toTimeString().slice(0, 8)}`,
 		}
 		messageGunRef.set(newMessage);
 		currentMessage = "";
