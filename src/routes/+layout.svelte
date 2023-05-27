@@ -11,11 +11,11 @@
 </script>
 
 <AppShell>
-	<svelte:fragment slot="header">Header</svelte:fragment>
+	<svelte:fragment slot="header">pChat</svelte:fragment>
 
 	<!-- Router Slot -->
 	<slot />
 	<!-- ---- / ---- -->
 
-	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
+	<svelte:fragment slot="pageFooter">made by shahank</svelte:fragment>
 </AppShell>
