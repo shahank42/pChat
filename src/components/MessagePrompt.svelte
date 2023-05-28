@@ -8,15 +8,17 @@
     let currentMessage: string = "";
 
     const sendMessage = () => {
-    const date = new Date();
-		let newMessage: Message = {
-			id: date.toISOString(),
-			sender: $nickname,
-			content: currentMessage,
-			timestamp: `${date.toTimeString().slice(0, 8)}`,
-		}
-		messageGunRef.set(newMessage);
-		currentMessage = "";
+        if (currentMessage != "") {
+            const date = new Date();
+            let newMessage: Message = {
+                id: date.toISOString(),
+                sender: $nickname,
+                content: currentMessage,
+                timestamp: `${date.toTimeString().slice(0, 8)}`,
+            }
+            messageGunRef.set(newMessage);
+            currentMessage = "";
+        }
 	}
 
     const onPromptKeydown = (event: KeyboardEvent): void => {
