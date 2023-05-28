@@ -5,12 +5,14 @@
 </script>
 
 <div class="grid grid-cols-[1fr_auto] gap-2 max-w-xl ml-auto">
-    <div class="card p-4 rounded-tr-none space-y-2 variant-soft border border-grey mt-6">
+    <div class="card px-4 pt-2 pb-3 variant-soft rounded-tr-none space-y-1 border border-grey mt-6">
         <header class="flex justify-between items-center">
             <p class="font-bold">{message.sender}</p>
-            <small>{message.timestamp}</small>
         </header>
-        <p>{message.content}</p>
+        <p class="">{message.content}</p>
     </div>
-    <img src={`https://api.dicebear.com/6.x/fun-emoji/svg?seed=${message.sender}`} alt="avatar" class="w-10 rounded-lg" />
+    <div class="flex flex-col">
+        <img src={`https://api.dicebear.com/6.x/fun-emoji/svg?seed=${message.sender}`} alt="avatar" class="w-10 rounded-lg mx-auto" />
+        <small class="text-xs pt-2 text-tertiary-800">{message.timestamp}</small>
+    </div>
 </div>

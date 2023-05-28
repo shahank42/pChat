@@ -35,6 +35,7 @@
     afterUpdate(() => {
         if (messages) messageScrollNode.scroll({ top: messageScrollNode.scrollHeight, behavior: 'smooth' });
     });
+
 </script>
 
 
