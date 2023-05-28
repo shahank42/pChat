@@ -22,7 +22,7 @@
     })
 </script>
 
-<section class="w-full flex-1 p-4 space-y-5">
+<section class="w-full flex-1 p-4 space-y-3">
     {#each messages as message}
         {#if message.sender !== $nickname}
             <MessageBubbleOther {message} />
