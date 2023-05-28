@@ -7,8 +7,8 @@
 	import '../app.postcss';
 </script>
 
-<div class="flex flex-col h-[100dvh] overflow-hidden">
-    <header class="w-full text-center border-b border-grey p-4">pChat</header>
+<div class="flex flex-col h-[100dvh] md:w-3/4 md:mx-auto overflow-hidden border-l border-r">
+    <header class="w-full text-center border-b border-grey p-4"><a href="/">pChat</a></header>
 	<slot />
     <footer class="w-full text-center border-t border-grey p-1">
 		<p class="text-sm">made by shahank</p>

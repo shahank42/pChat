@@ -37,18 +37,26 @@
     });
 </script>
 
-<main class="flex-1 flex flex-col overflow-y-scroll md:w-3/4 md:mx-auto" bind:this={messageScrollNode}>
+
+
+<main class="flex-1 flex flex-col overflow-y-scroll" bind:this={messageScrollNode}>
 	{#if !showChatInterface}
 		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
 
+	<span class="w-full mx-auto left-0 right-0 flex flex-row align-middle justify-center absolute">
+		<div class="border-l bg-surface-500 border-b border-r py-1 px-2 text-sm rounded-br-lg rounded-bl-lg">Room ID: {roomID}</div>
+	</span>
+
 	{#if showChatInterface}
-		<div class="bg-surface-500/30 p-4 flex-1">
+		<div class="bg-surface-500/30 p-4 flex-1 pt-4">
 			<MessageFeed {messages} />
 		</div>
 	{/if}
 </main>
+
 	
 {#if showChatInterface}
 	<MessagePrompt {messageGunRef} />
 {/if}
+

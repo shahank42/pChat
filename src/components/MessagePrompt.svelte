@@ -26,7 +26,7 @@
 	}
 </script>
 
-<div class="bg-surface-500/30 p-4 border-t border-grey md:w-3/4 md:mx-auto">
+<div class="bg-surface-500/30 p-4 border-t border-grey ">
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
         <button class="input-group-shim">+</button>
         <textarea
@@ -35,7 +35,7 @@
             name="prompt"
             id="prompt"
             placeholder=""
-            rows="2"
+            rows="1"
             on:keydown={onPromptKeydown}
         />
         <button class="variant-filled-primary" on:click={sendMessage}>Send</button>

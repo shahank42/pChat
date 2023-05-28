@@ -4,6 +4,8 @@
     export let toggleChatInterface: () => void = () => {};
 
     import { nickname } from "$lib/stores/userStore";
+
+    const generateRoomID = () => Date.now().toString(26) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(26);
 </script>
 
 <div class="container h-full mx-auto flex flex-col justify-center items-center">	
@@ -17,6 +19,6 @@
     {/if}
 
     {#if toCreateRoom}
-	    <a href={`/chat/${crypto.randomUUID()}`} class="btn variant-filled w-3/4 md:w-1/2 mt-5">Create a pChat Room!</a>
+	    <a href={`/chat/${generateRoomID()}`} class="btn variant-filled w-3/4 md:w-1/2 mt-5">Create a pChat Room!</a>
     {/if}
 </div>

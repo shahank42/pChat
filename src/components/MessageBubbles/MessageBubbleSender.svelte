@@ -5,10 +5,10 @@
 </script>
 
 <div class="grid grid-cols-[1fr_auto] gap-2 max-w-xl ml-auto">
-    <div class="card p-4 rounded-tr-none space-y-2 variant-soft border border-grey">
+    <div class="card p-4 rounded-tr-none space-y-2 variant-soft border border-grey mt-6">
         <header class="flex justify-between items-center">
             <p class="font-bold">{message.sender}</p>
-            <small class="opacity-50">{message.timestamp}</small>
+            <small>{message.timestamp}</small>
         </header>
         <p>{message.content}</p>
     </div>
