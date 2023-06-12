@@ -7,9 +7,11 @@
 	import '../app.postcss';
 	
 	import Header from '../components/Header.svelte';
+	import { Modal } from '@skeletonlabs/skeleton';
 </script>
 
 <div class="flex flex-col h-[100dvh] md:w-3/4 md:mx-auto overflow-hidden md:border-l md:border-r">
+	<Modal />
     <Header />
 	<slot />
     <footer class="w-full text-center border-t border-grey p-1">
