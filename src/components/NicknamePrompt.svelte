@@ -18,19 +18,23 @@
         <button 
             class="btn variant-filled w-3/4 md:w-1/2 mt-5" 
             on:click={() => {
-                $chatMode = true;
-                toggleChatInterface();
+                if ($nickname !== "") {
+                    $chatMode = true;
+                    toggleChatInterface();
+                }
             }}
         >Join this pChat Room!</button>
     {/if}
 
     {#if toCreateRoom}
 	    <a 
-            href={`/chat/${generateRoomID()}`} 
+            href={$nickname !== "" ? `/chat/${generateRoomID()}` : "/"} 
             class="btn variant-filled w-3/4 md:w-1/2 mt-5"
             on:click={() => {
-                $chatMode = true;
-                $roomCreator = true;
+                if ($nickname !== "") {
+                    $chatMode = true;
+                    $roomCreator = true;
+                }
             }}
         >Create a pChat Room!</a>
     {/if}
