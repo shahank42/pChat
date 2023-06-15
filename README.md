@@ -1,8 +1,10 @@
-# pChat (alpha)
+# pChat (beta)
 
-> A quick, (soon) disposable and decentralized messaging web application.
+> A quick, disposable and decentralized messaging web application.
 
 Created using Svelte, SvelteKit, TailwindCSS, Skeleton, and Gun.
+
+Note: messages have been known to get lost in poor network conditions.
 
 ---
 
