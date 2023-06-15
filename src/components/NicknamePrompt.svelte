@@ -3,9 +3,10 @@
     export let toCreateRoom: boolean = false;
     export let toggleChatInterface: () => void = () => {};
 
-    import { chatMode, nickname, roomCreator } from "$lib/stores/userStore";
+    import { chatMode, nickname, roomCreator, roomID } from "$lib/stores/userStore";
 
     const generateRoomID = () => Date.now().toString(26) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(26);
+    if (!$roomID) $roomID = generateRoomID();
 </script>
 
 <div class="container h-full mx-auto flex flex-col justify-center items-center">	
@@ -28,12 +29,12 @@
 
     {#if toCreateRoom}
 	    <a 
-            href={$nickname !== "" ? `/chat/${generateRoomID()}` : "/"} 
+            href={$nickname !== "" ? `/chat/${$roomID}` : "/"} 
             class="btn variant-filled w-3/4 md:w-1/2 mt-5"
             on:click={() => {
                 if ($nickname !== "") {
                     $chatMode = true;
-                    $roomCreator = true;
+                    $roomCreator = $nickname;
                 }
             }}
         >Create a pChat Room!</a>

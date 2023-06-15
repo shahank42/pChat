@@ -6,7 +6,7 @@
 
 	import { afterUpdate } from "svelte";
 	import Gun from "gun/gun";
-	import { nickname } from "../../../lib/stores/userStore";
+	import { nickname, roomID } from "$lib/stores/userStore";
 	import MessageFeed from "../../../components/MessageFeed.svelte";
 	import MessagePrompt from "../../../components/MessagePrompt.svelte";
 	import NicknamePrompt from "../../../components/NicknamePrompt.svelte";
@@ -14,7 +14,7 @@
 	let showChatInterface: boolean = ($nickname !== "");
 	let messages: Message[] = [];
 	let messageScrollNode: HTMLElement;
-	let roomID: string | null = data.id;
+	$roomID = data.id;
 
 	const toggleChatInterface = () => { showChatInterface = true; }
 	
@@ -24,7 +24,7 @@
 		]
 	});
 	
-	const messageGunRef = gun.get(roomID);
+	const messageGunRef = gun.get($roomID);
 
 	messageGunRef.map().once((message: any) => {
 		if (message) {
@@ -35,7 +35,6 @@
     afterUpdate(() => {
         if (messages) messageScrollNode.scroll({ top: messageScrollNode.scrollHeight, behavior: 'smooth' });
     });
-
 </script>
 
 
@@ -46,7 +45,7 @@
 	{/if}
 
 	<span class="w-full mx-auto left-0 right-0 flex flex-row align-middle justify-center absolute">
-		<div class="border-l bg-surface-900 border-b border-r py-1 px-2 text-sm rounded-br-lg rounded-bl-lg">Room ID: {roomID}</div>
+		<div class="border-l bg-surface-900 border-b border-r py-1 px-2 text-sm rounded-br-lg rounded-bl-lg">Room ID: {$roomID}</div>
 	</span>
 
 	{#if showChatInterface}
