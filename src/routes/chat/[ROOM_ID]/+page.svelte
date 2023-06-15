@@ -6,7 +6,7 @@
 
 	import { afterUpdate } from "svelte";
 	import Gun from "gun/gun";
-	import { nickname, roomID, messageGunRef } from "$lib/stores/userStore";
+	import { nickname, roomID, gunRef, roomDeleted } from "$lib/stores/userStore";
 	import MessageFeed from "../../../components/MessageFeed.svelte";
 	import MessagePrompt from "../../../components/MessagePrompt.svelte";
 	import NicknamePrompt from "../../../components/NicknamePrompt.svelte";
@@ -24,14 +24,20 @@
 		]
 	});
 	
-	$messageGunRef = gun.get($roomID);
+	$gunRef = gun.get($roomID);
 
-	$messageGunRef.map().once((message: any) => {
-		if (message) {
-			messages = [...messages, message];
-		}
-	});
+	$gunRef.get("destroy-room").on((deleted) => {
+		$roomDeleted = (deleted === "yes" ? true : false);
+	})
 
+	if (!$roomDeleted) {
+		$gunRef.get("feed").get("messages").map().once((message: any) => {
+			if (message) {
+				messages = [...messages, message];
+			}
+		});
+	}
+	
     afterUpdate(() => {
         if (messages) messageScrollNode.scroll({ top: messageScrollNode.scrollHeight, behavior: 'smooth' });
     });

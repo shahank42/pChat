@@ -1,13 +1,24 @@
 <script lang="ts">
-    import { chatMode, roomCreator } from "$lib/stores/userStore";
+    import { chatMode, gunRef, roomCreator, roomDeleted } from "$lib/stores/userStore";
     import {  modalStore } from '@skeletonlabs/skeleton';
     import type { ModalSettings } from '@skeletonlabs/skeleton';
+    import { goto } from '$app/navigation';
+
+    const destroyRoom = () => {
+        $gunRef.get("feed").put(null);
+        $gunRef.get("destroy-room").put("yes");
+        goto("/");   
+    }
 
     const modal: ModalSettings = {
     	type: 'confirm',
     	title: 'Are you sure?',
     	body: 'This action is irreversible. Do you want to delete these chat logs?',
-    	response: (r: boolean) => console.log('response:', r),
+    	response: (r: boolean) => {
+            if (r) {
+                destroyRoom();
+            }
+        },
     };
 </script>
 
@@ -20,7 +31,7 @@
         }}
     >pChat</a>
 
-    {#if ($chatMode && $roomCreator)}
+    {#if ($chatMode && $roomCreator && !$roomDeleted)}
         <button class="btn variant-filled-primary" on:click={() => {
             modalStore.trigger(modal);
         }}>
