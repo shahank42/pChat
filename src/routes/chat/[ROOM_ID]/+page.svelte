@@ -6,7 +6,7 @@
 
 	import { afterUpdate } from "svelte";
 	import Gun from "gun/gun";
-	import { nickname, roomID } from "$lib/stores/userStore";
+	import { nickname, roomID, messageGunRef } from "$lib/stores/userStore";
 	import MessageFeed from "../../../components/MessageFeed.svelte";
 	import MessagePrompt from "../../../components/MessagePrompt.svelte";
 	import NicknamePrompt from "../../../components/NicknamePrompt.svelte";
@@ -24,9 +24,9 @@
 		]
 	});
 	
-	const messageGunRef = gun.get($roomID);
+	$messageGunRef = gun.get($roomID);
 
-	messageGunRef.map().once((message: any) => {
+	$messageGunRef.map().once((message: any) => {
 		if (message) {
 			messages = [...messages, message];
 		}
@@ -57,6 +57,6 @@
 
 	
 {#if showChatInterface}
-	<MessagePrompt {messageGunRef} />
+	<MessagePrompt />
 {/if}
 

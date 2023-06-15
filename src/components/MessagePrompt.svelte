@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let messageGunRef: any;
+    // export let messageGunRef: any;
 
     import type { Message } from "../types/types";
-    import { nickname } from "$lib/stores/userStore";
+    import { nickname, messageGunRef } from "$lib/stores/userStore";
     import sendIconUrl from "../svg/send-svgrepo-com.svg?url";
 
     let currentMessage: string = "";
@@ -16,7 +16,7 @@
                 content: currentMessage,
                 timestamp: `${date.toTimeString().slice(0, 8)}`,
             }
-            messageGunRef.set(newMessage);
+            $messageGunRef.set(newMessage);
             currentMessage = "";
         }
 	}
