@@ -28,6 +28,7 @@
         class="btn"
         on:click={() => {
             $chatMode = false;
+            $roomCreator = "";
         }}
     >pChat</a>
 
