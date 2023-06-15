@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
+
     export let toJoinRoom: boolean = false;
     export let toCreateRoom: boolean = false;
     export let toggleChatInterface: () => void = () => {};
@@ -10,23 +12,41 @@
         $roomID = generateRoomID();
         return $roomID;
     }
+
+    const joinRoom = () => {
+        if ($nickname !== "") {
+            $chatMode = true;
+            toggleChatInterface();
+        }
+    }
+
+    const createRoom = () => {
+        if ($nickname !== "") {
+            $chatMode = true;
+            $roomCreator = $nickname;
+        }
+        goto($nickname !== "" ? `/chat/${roomGen()}` : "/");
+    }
+
+    const onPromptKeydown = (event: KeyboardEvent): void => {
+		if (["Enter"].includes(event.code)) {
+			event.preventDefault();
+			if (toJoinRoom) joinRoom();
+            if (toCreateRoom) createRoom();
+		}
+	}
 </script>
 
 <div class="container h-full mx-auto flex flex-col justify-center items-center">	
     <label class="label w-3/4 md:w-1/2">
         <span>Choose a nickname:</span>
-        <input class="input w-full p-4 h-10" type="text" bind:value={$nickname}/>
+        <input class="input w-full p-4 h-10" type="text" bind:value={$nickname} on:keydown={onPromptKeydown} />
     </label>
 
     {#if toJoinRoom}
         <button 
             class="btn variant-filled w-3/4 md:w-1/2 mt-5" 
-            on:click={() => {
-                if ($nickname !== "") {
-                    $chatMode = true;
-                    toggleChatInterface();
-                }
-            }}
+            on:click={joinRoom}
         >Join this pChat Room!</button>
     {/if}
 
@@ -34,12 +54,7 @@
 	    <a 
             href={$nickname !== "" ? `/chat/${roomGen()}` : "/"} 
             class="btn variant-filled w-3/4 md:w-1/2 mt-5"
-            on:click={() => {
-                if ($nickname !== "") {
-                    $chatMode = true;
-                    $roomCreator = $nickname;
-                }
-            }}
+            on:click={createRoom}
         >Create a pChat Room!</a>
     {/if}
 </div>
