@@ -35,7 +35,7 @@
                 class="bg-transparent border-0 ring-0 p-3 pl-6 resize-none"
                 name="prompt"
                 id="prompt"
-                placeholder="Sending messages is not allowed."
+                placeholder="No messaging in destroyed rooms..."
                 rows="1"
                 disabled
             />
