@@ -36,7 +36,7 @@
                 name="prompt"
                 id="prompt"
                 placeholder="No messaging in destroyed rooms..."
-                rows="1"
+                rows="2"
                 disabled
             />
             <button class="variant-filled-primary w-14" disabled >
@@ -54,7 +54,7 @@
                 name="prompt"
                 id="prompt"
                 placeholder="Share your thoughts!"
-                rows="3"
+                rows="2"
             />
             <button class="variant-filled-primary w-14" on:click={sendMessage}>
                 <img src={sendIconUrl} class="w-10" alt="Send" />
