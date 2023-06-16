@@ -8,5 +8,9 @@ module.exports = {
 	theme: {
 		extend: {},
 	},
-	plugins: [require('@tailwindcss/forms'), ...skeleton()],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms'), 
+		...skeleton()
+	],
 }

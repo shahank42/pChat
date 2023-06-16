@@ -54,8 +54,7 @@
                 name="prompt"
                 id="prompt"
                 placeholder="Share your thoughts!"
-                rows="1"
-                on:keydown={onPromptKeydown}
+                rows="3"
             />
             <button class="variant-filled-primary w-14" on:click={sendMessage}>
                 <img src={sendIconUrl} class="w-10" alt="Send" />
