@@ -16,7 +16,7 @@
             <p class="font-bold text-sm md:text-base">{message.sender}</p>
         </header>
         <div class="card px-4 py-2 pt-1 pb-3 variant-soft-primary rounded-tl-none space-y-1 border border-grey mt-1">    
-            <p class="prose text-sm md:text-base">
+            <p class="prose prose-sm md:prose-base text-sm md:text-base break-all hyphens-auto">
                 <SvelteMarkdown source={message.content} />
             </p>
         </div>
