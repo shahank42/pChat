@@ -13,7 +13,7 @@
     const modal: ModalSettings = {
     	type: 'confirm',
     	title: 'Are you sure?',
-    	body: 'This action is irreversible. Do you want to delete these chat logs?',
+    	body: 'This action is irreversible, and will render the room inaccessible.',
     	response: (r: boolean) => {
             if (r) {
                 destroyRoom();
