@@ -50,9 +50,9 @@
 		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
 
-	<span class="w-full mx-auto left-0 right-0 flex flex-row align-middle justify-center absolute">
+	<!-- <span class="w-full mx-auto left-0 right-0 flex flex-row align-middle justify-center absolute">
 		<div class="border-l bg-surface-900 border-b border-r py-1 px-2 text-sm rounded-br-lg rounded-bl-lg">Room ID: {$roomID}</div>
-	</span>
+	</span> -->
 
 	{#if showChatInterface}
 		<div class="bg-surface-500/30 p-4 flex-1 pt-8">

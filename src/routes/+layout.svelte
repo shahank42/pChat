@@ -8,10 +8,22 @@
 	
 	import Header from '../components/Header.svelte';
 	import { Modal } from '@skeletonlabs/skeleton';
+
+	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings } from '@skeletonlabs/skeleton';
+
+	import Sidebar from '../components/Sidebar.svelte';
 </script>
 
 <div class="flex flex-col h-[100dvh] md:w-3/4 md:mx-auto overflow-hidden md:border-l md:border-r">
 	<Modal />
+
+	<Drawer>
+		{#if $drawerStore.id === "sidebar"}
+			<Sidebar />
+		{/if}
+	</Drawer>
+
     <Header />
 	<slot />
     <footer class="w-full text-center border-t border-grey p-1">
