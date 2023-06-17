@@ -5,7 +5,8 @@
     export let toCreateRoom: boolean = false;
     export let toggleChatInterface: () => void = () => {};
 
-    import { chatMode, nickname, roomCreator, roomDeleted, roomID } from "$lib/stores/userStore";
+    import { chatMode, gunRef, nickname, roomCreator, roomDeleted, roomID } from "$lib/stores/userStore";
+	import type { User } from "../types/types";
 
     const generateRoomID = () => Date.now().toString(26) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(26);
     const roomGen = () => {
@@ -17,6 +18,11 @@
         if ($nickname !== "") {
             $chatMode = true;
             toggleChatInterface();
+            let newUser: User = {
+                nickname: $nickname,
+                isCreator: ($roomCreator == $nickname),
+            }
+            $gunRef.get("users").set(newUser);
         }
     }
 
@@ -25,6 +31,11 @@
             $chatMode = true;
             $roomDeleted = false;
             $roomCreator = $nickname;
+            let newUser: User = {
+                nickname: $nickname,
+                isCreator: ($roomCreator == $nickname),
+            }
+            $gunRef.get("users").set(newUser);
         }
         goto($nickname !== "" ? `/chat/${roomGen()}` : "/");
     }

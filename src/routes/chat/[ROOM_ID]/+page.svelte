@@ -30,6 +30,10 @@
 		$roomDeleted = (deleted === "yes" ? true : false);
 	})
 
+	$gunRef.get("users").map().on((user) => {
+		console.log(user);
+	})
+
 	if (!$roomDeleted) {
 		$gunRef.get("feed").get("messages").map().once((message: any) => {
 			if (message) {

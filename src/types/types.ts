@@ -8,3 +8,8 @@ export interface Message {
 export interface PageData {
     id: string;
 };
+
+export interface User {
+    nickname: string;
+    isCreator: boolean;
+}
