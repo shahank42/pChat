@@ -1,12 +1,12 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
-	import type { Message, PageData } from "../../../types/types";
+	import type { Message, PageData, User } from "../../../types/types";
 
 	export let data: PageData;
 
 	import { afterUpdate } from "svelte";
 	import Gun from "gun/gun";
-	import { nickname, roomID, gunRef, roomDeleted } from "$lib/stores/userStore";
+	import { nickname, roomID, gunRef, roomDeleted, roomCreator } from "$lib/stores/userStore";
 	import MessageFeed from "../../../components/MessageFeed.svelte";
 	import MessagePrompt from "../../../components/MessagePrompt.svelte";
 	import NicknamePrompt from "../../../components/NicknamePrompt.svelte";
@@ -30,9 +30,11 @@
 		$roomDeleted = (deleted === "yes" ? true : false);
 	})
 
-	$gunRef.get("users").map().on((user) => {
-		console.log(user);
-	})
+	// let newUser: User = {
+    //     nickname: $nickname,
+    //     isCreator: ($roomCreator == $nickname),
+    // }
+    // $gunRef.get("users").set(newUser);
 
 	if (!$roomDeleted) {
 		$gunRef.get("feed").get("messages").map().once((message: any) => {

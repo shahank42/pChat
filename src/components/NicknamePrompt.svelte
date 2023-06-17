@@ -18,11 +18,6 @@
         if ($nickname !== "") {
             $chatMode = true;
             toggleChatInterface();
-            let newUser: User = {
-                nickname: $nickname,
-                isCreator: ($roomCreator == $nickname),
-            }
-            $gunRef.get("users").set(newUser);
         }
     }
 
@@ -31,11 +26,6 @@
             $chatMode = true;
             $roomDeleted = false;
             $roomCreator = $nickname;
-            let newUser: User = {
-                nickname: $nickname,
-                isCreator: ($roomCreator == $nickname),
-            }
-            $gunRef.get("users").set(newUser);
         }
         goto($nickname !== "" ? `/chat/${roomGen()}` : "/");
     }

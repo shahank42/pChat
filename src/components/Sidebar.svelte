@@ -7,12 +7,15 @@
     import {  modalStore } from '@skeletonlabs/skeleton';
     import type { ModalSettings } from '@skeletonlabs/skeleton';
     import { goto } from '$app/navigation';
+	import type { User } from '../types/types';
+
+
 
     const destroyRoom = () => {
         drawerStore.close();
         $gunRef.get("feed").put(null);
         $gunRef.get("destroy-room").put("yes");
-        goto("/");   
+        // goto("/");   
     }
 
     const modal: ModalSettings = {
