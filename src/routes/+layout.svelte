@@ -26,7 +26,4 @@
 
     <Header />
 	<slot />
-    <footer class="w-full text-center border-t border-grey p-1">
-		<p class="text-sm">made by shahank</p>
-	</footer>
 </div>
