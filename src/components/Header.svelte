@@ -3,6 +3,7 @@
     import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
     import menuIconUrl from "../svg/hamburger-svgrepo-com.svg?url";
+    import pChatLogo from "../svg/pChat.svg?url";
     
     import { chatMode, gunRef, roomCreator, roomDeleted } from "$lib/stores/userStore";
     import {  modalStore } from '@skeletonlabs/skeleton';
@@ -38,14 +39,16 @@
 </script>
 
 <header class="w-full flex flex-row text-center border-b border-grey p-4 items-center justify-between">
-	<a
-        href="/"
+	<button
         class="btn"
         on:click={() => {
             $chatMode = false;
             $roomCreator = "";
+            goto("/")
         }}
-    > </a>
+    >
+        <img src={pChatLogo} class="h-10 mx-auto" alt="menu" />
+    </button>
 
     <!-- {#if ($chatMode && $roomCreator && !$roomDeleted)}
         <button class="btn variant-filled-primary" on:click={() => {
@@ -63,7 +66,7 @@
             }}
             class="btn variant-filled-secondary"
         >
-            <img src={menuIconUrl} class="w-5" alt="menu" />
+            <img src={menuIconUrl} class="w-7 h-7" alt="menu" />
         </button>
     {/if}
 </header>

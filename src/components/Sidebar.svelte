@@ -2,6 +2,7 @@
     import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
     import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
+    import pChatLogo from "../svg/pChat.svg?url";
     import { chatMode, gunRef, roomCreator, roomDeleted, roomID } from "$lib/stores/userStore";
     import {  modalStore } from '@skeletonlabs/skeleton';
     import type { ModalSettings } from '@skeletonlabs/skeleton';
@@ -27,11 +28,13 @@
 </script>
 
 <section>
-    <div class="w-full flex flex-row text-center border-b border-grey p-4 items-center justify-between">
-        <a
+    <div class="w-full flex flex-col text-center border-b border-grey p-4 items-center justify-between">
+        <!-- <a
             href="/"
             class="btn"
-        >pChat</a>
+        >pChat</a> -->
+        <img src={pChatLogo} class="h-30 mx-auto" alt="menu" />
+        <p>made by shahank</p>
     </div>
 
     <div class="w-full flex flex-col items-center justify-between border border-grey border-b">

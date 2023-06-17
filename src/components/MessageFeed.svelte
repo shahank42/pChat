@@ -2,6 +2,7 @@
     import { Modal, modalStore } from '@skeletonlabs/skeleton';
     import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
 
+    import roomDestroyedPic from "../svg/Destroyed room.svg?url";
 	import { nickname, roomDeleted } from "$lib/stores/userStore";
 	import MessageBubbleOther from "./MessageBubbles/MessageBubbleOther.svelte";
 	import MessageBubbleSender from "./MessageBubbles/MessageBubbleSender.svelte";
@@ -16,14 +17,12 @@
                 <h1>This pChat room has been destroyed.</h1>
             </header>
             <section class="p-4">
-                The creator of this room has destroyed this room. 
-            </section>
-            <section class="p-4">
                 All messages and logs in this room currently and permanently remain inaccessible.
             </section>
             <footer class="card-footer text-sm">
                 For further queries and/or grievances, contact the creator of the room.
             </footer>
+            <img src={roomDestroyedPic} class="py-10 h-64 mx-auto" alt="menu" />
         </div>
     {/if}
     {#if !$roomDeleted}
