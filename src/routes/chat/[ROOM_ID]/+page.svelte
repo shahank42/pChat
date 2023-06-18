@@ -30,11 +30,13 @@
 		$roomDeleted = (deleted === "yes" ? true : false);
 	})
 
-	// let newUser: User = {
-    //     nickname: $nickname,
-    //     isCreator: ($roomCreator == $nickname),
-    // }
-    // $gunRef.get("users").set(newUser);
+	let newUser: User = {
+        nickname: $nickname,
+        isCreator: ($roomCreator == $nickname),
+    }
+    $gunRef.get("users").set(newUser);
+
+	
 
 	if (!$roomDeleted) {
 		$gunRef.get("feed").get("messages").map().once((message: any) => {

@@ -3,13 +3,20 @@
     import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
     import pChatLogo from "../svg/pChat.svg?url";
-    import { chatMode, gunRef, roomCreator, roomDeleted, roomID } from "$lib/stores/userStore";
+    import { chatMode, gunRef, roomCreator, roomDeleted, roomID, nickname } from "$lib/stores/userStore";
     import {  modalStore } from '@skeletonlabs/skeleton';
     import type { ModalSettings } from '@skeletonlabs/skeleton';
     import { goto } from '$app/navigation';
 	import type { User } from '../types/types';
 
+    let usersList: User[] = [];
+	$gunRef.get("users").map().once((user: User) => {
+		if (user && $nickname !== "") {
+			usersList = [...usersList, user];
+		}
+	});
 
+	// $: console.log(usersList)
 
     const destroyRoom = () => {
         drawerStore.close();
@@ -51,6 +58,13 @@
                     Destroy pChat Room
             </button>
         {/if}
-</div>
+    </div>
+
+    <div>
+        <h1 class="p-4 px-6 text-xl">People in this room:</h1>
+        {#each usersList as user}
+            <p class="p-2 px-6">{user.nickname}</p>
+        {/each}
+    </div>
 </section>
 
