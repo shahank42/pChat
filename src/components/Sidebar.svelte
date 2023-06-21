@@ -10,13 +10,13 @@
 	import type { User } from '../types/types';
 
     let usersList: User[] = [];
-	$gunRef.get("users").map().once((user: User) => {
-		if (user && $nickname !== "") {
-			usersList = [...usersList, user];
+	$gunRef.get("users").map().on((user: User) => {
+		if (user && ($nickname !== "")) {
+			usersList.push(user);
 		}
 	});
 
-	// $: console.log(usersList)
+	$: console.log(usersList)
 
     const destroyRoom = () => {
         drawerStore.close();
