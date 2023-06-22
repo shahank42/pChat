@@ -1,24 +1,32 @@
 <script lang="ts">
-    import SvelteMarkdown from 'svelte-markdown'
-	import type { Message } from "../../types/types";
+	import type { Message } from '../../types/types';
 
-    export let message: Message;
+	import SvelteMarkdown from 'svelte-markdown';
+
+	export let message: Message;
 </script>
 
-<div class="grid grid-cols-[auto_1fr] gap-2 max-w-xl w-fit mr-auto">
-    <div class="flex flex-col">
-        <img src={`https://api.dicebear.com/6.x/fun-emoji/svg?seed=${message.sender}`} alt="avatar" class="w-10 rounded-lg mx-auto" />
-        <small class="text-xs pt-2 text-tertiary-800">{message.timestamp}</small>
-    </div>
+<div class="mr-auto grid w-fit max-w-xl grid-cols-[auto_1fr] gap-2">
+	<div class="flex flex-col">
+		<img
+			src={`https://api.dicebear.com/6.x/fun-emoji/svg?seed=${message.sender}`}
+			alt="avatar"
+			class="mx-auto w-10 rounded-lg"
+		/>
+		<small class="pt-2 text-xs text-tertiary-800">{message.timestamp}</small>
+	</div>
 
-    <div class="flex flex-col">
-        <header class="flex justify-between items-center">
-            <p class="font-bold text-sm md:text-base">{message.sender}</p>
-        </header>
-        <div class="card px-4 py-2 pt-1 pb-3 variant-soft-primary rounded-tl-none space-y-1 border border-grey mt-1">    
-            <p class="prose prose-sm md:prose-base text-sm md:text-base break-all hyphens-auto">
-                <SvelteMarkdown source={message.content} />
-            </p>
-        </div>
-    </div>
+	<div class="flex flex-col">
+		<header class="flex items-center justify-between">
+			<p class="text-sm font-bold md:text-base">{message.sender}</p>
+		</header>
+
+		<div
+			class="card variant-soft-primary border-grey mt-1 space-y-1 rounded-tl-none border px-4 py-2 pb-3 pt-1"
+		>
+			<p class="prose prose-sm hyphens-auto break-all text-sm md:prose-base md:text-base">
+				<SvelteMarkdown source={message.content} />
+			</p>
+		</div>
+	</div>
 </div>

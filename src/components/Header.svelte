@@ -1,72 +1,46 @@
 <script lang="ts">
-    import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
-    import type { DrawerSettings } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
-    import menuIconUrl from "../svg/hamburger-svgrepo-com.svg?url";
-    import pChatLogo from "../svg/pChat.svg?url";
-    
-    import { chatMode, gunRef, roomCreator, roomDeleted } from "$lib/stores/userStore";
-    import {  modalStore } from '@skeletonlabs/skeleton';
-    import type { ModalSettings } from '@skeletonlabs/skeleton';
-    import { goto } from '$app/navigation';
+	import { drawerStore } from '@skeletonlabs/skeleton';
+	import { goto } from '$app/navigation';
+	import { chatMode, roomCreator } from '$lib/stores/userStore';
 
-    // const destroyRoom = () => {
-    //     $gunRef.get("feed").put(null);
-    //     $gunRef.get("destroy-room").put("yes");
-    //     goto("/");   
-    // }
+	import menuIconUrl from '../svg/hamburger-svgrepo-com.svg?url';
+	import pChatLogo from '../svg/pChat.svg?url';
 
-    // const modal: ModalSettings = {
-    // 	type: 'confirm',
-    // 	title: 'Are you sure?',
-    // 	body: 'This action is irreversible, and will render the room inaccessible.',
-    // 	response: (r: boolean) => {
-    //         if (r) {
-    //             destroyRoom();
-    //         }
-    //     },
-    // };
-
-    const drawerSettings: DrawerSettings = {
-    	id: 'sidebar',
-        position: 'right',
-    	bgBackdrop: 'backdrop-blur-xl',
-        border: "border border-grey",
-    	width: 'w-[280px] md:w-[480px]',
-    	padding: 'p-4',
-    	rounded: 'rounded-xl',
-    };
+	const drawerSettings: DrawerSettings = {
+		id: 'sidebar',
+		position: 'right',
+		bgBackdrop: 'backdrop-blur-xl',
+		border: 'border border-grey',
+		width: 'w-[280px] md:w-[480px]',
+		padding: 'p-4',
+		rounded: 'rounded-xl'
+	};
 </script>
 
-<header class="w-full flex flex-row text-center border-b border-grey p-4 items-center justify-between">
+<header
+	class="border-grey flex w-full flex-row items-center justify-between border-b p-4 text-center"
+>
 	<button
-        class="btn"
-        on:click={() => {
-            $chatMode = false;
-            $roomCreator = "";
-            goto("/")
-        }}
-    >
-        <img src={pChatLogo} class="h-10 mx-auto" alt="menu" />
-    </button>
+		class="btn"
+		on:click={() => {
+			$chatMode = false;
+			$roomCreator = '';
+			goto('/');
+		}}
+	>
+		<img src={pChatLogo} class="mx-auto h-10" alt="menu" />
+	</button>
 
-    <!-- {#if ($chatMode && $roomCreator && !$roomDeleted)}
-        <button class="btn variant-filled-primary" on:click={() => {
-            modalStore.trigger(modal);
-        }}>
-            Destroy pChat Room
-        </button>
-    {/if} -->
-
-
-    {#if ($chatMode) }
-        <button
-            on:click={() => {
-                drawerStore.open(drawerSettings);
-            }}
-            class="btn variant-filled-secondary"
-        >
-            <img src={menuIconUrl} class="w-7 h-7" alt="menu" />
-        </button>
-    {/if}
+	{#if $chatMode}
+		<button
+			class="btn variant-filled-secondary"
+			on:click={() => {
+				drawerStore.open(drawerSettings);
+			}}
+		>
+			<img src={menuIconUrl} class="h-7 w-7" alt="menu" />
+		</button>
+	{/if}
 </header>
