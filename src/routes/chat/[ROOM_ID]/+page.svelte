@@ -25,7 +25,13 @@
 	};
 
 	const gun = Gun({
-		peers: ['https://pchat-relay-test.shahank.repl.co/gun']
+		peers: [
+			'https://pchat-relay-test.shahank.repl.co/gun',
+			'https://gun-manhattan.herokuapp.com/gun',
+			// 'https://relay.129.153.59.37.nip.io/gun',
+			'https://peer.wallie.io/gun',
+			'https://gundb-relay-mlccl.ondigitalocean.app/gun',
+		],
 	});
 
 	$gunRef = gun.get($roomID);
