@@ -9,14 +9,14 @@
     import { goto } from '$app/navigation';
 	import type { User } from '../types/types';
 
-    let usersList: User[] = [];
-	$gunRef.get("users").map().on((user: User) => {
-		if (user && ($nickname !== "")) {
-			usersList.push(user);
-		}
-	});
+    // let usersList: User[] = [];
+	// $gunRef.get("users").map().on((user: User) => {
+	// 	if (user && ($nickname !== "")) {
+	// 		usersList.push(user);
+	// 	}
+	// });
 
-	$: console.log(usersList)
+	// $: console.log(usersList)
 
     const destroyRoom = () => {
         drawerStore.close();
@@ -60,11 +60,11 @@
         {/if}
     </div>
 
-    <div>
+    <!-- <div>
         <h1 class="p-4 px-6 text-xl">People in this room:</h1>
         {#each usersList as user}
             <p class="p-2 px-6">{user.nickname}</p>
         {/each}
-    </div>
+    </div> -->
 </section>
 
