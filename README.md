@@ -61,3 +61,9 @@ You wanna contribute to pChat?
 That would be totally amazing.
 
 Just create a pull request and we'll see how it goes from there.
+
+---
+
+# Credits
+
+Huge thanks to [slickmojang7](https://scratch.mit.edu/users/slickmojang7/) for the artwork, rad stuff.
