@@ -39,7 +39,7 @@
 				class="resize-none border-0 bg-transparent p-3 pl-6 ring-0"
 				name="prompt"
 				id="prompt"
-				placeholder="No messaging in destroyed rooms..."
+				placeholder="No messaging in destroyed rooms!"
 				rows="2"
 				disabled
 			/>
@@ -59,7 +59,7 @@
 				class="resize-none border-0 bg-transparent p-3 pl-6 ring-0"
 				name="prompt"
 				id="prompt"
-				placeholder="Share your thoughts!"
+				placeholder="Share your thoughts (markdown supported!)"
 				rows="2"
 			/>
 
