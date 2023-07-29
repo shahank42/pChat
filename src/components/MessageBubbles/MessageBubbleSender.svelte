@@ -9,13 +9,13 @@
 <div class="ml-auto grid w-fit max-w-xl grid-cols-[1fr_auto] gap-2">
 	<div class="flex flex-col">
 		<header class="flex items-center justify-between">
-			<p class="ml-auto text-sm font-bold md:text-base">{message.sender}</p>
+			<p class="ml-auto text-sm font-bold md:text-base mb-1">{message.sender}</p>
 		</header>
 
 		<div
-			class="card border-grey variant-soft mt-1 space-y-1 rounded-tr-none border px-4 py-2 pb-3 pt-1"
+			class="card border-grey variant-soft rounded-tr-none border"
 		>
-			<p class="prose prose-sm hyphens-auto break-all text-sm md:prose-base md:text-base">
+			<p class="prose prose-sm mt-0 hyphens-auto break-all text-sm md:prose-base md:text-base px-3 md:px-4 py-1 md:py-2">
 				<SvelteMarkdown source={message.content} />
 			</p>
 		</div>

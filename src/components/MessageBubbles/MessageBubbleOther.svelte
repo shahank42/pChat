@@ -18,13 +18,13 @@
 
 	<div class="flex flex-col">
 		<header class="flex items-center justify-between">
-			<p class="text-sm font-bold md:text-base">{message.sender}</p>
+			<p class="mb-1 text-sm font-bold md:text-base">{message.sender}</p>
 		</header>
 
-		<div
-			class="card variant-soft-primary border-grey mt-1 space-y-1 rounded-tl-none border px-4 py-2 pb-3 pt-1"
-		>
-			<p class="prose prose-sm hyphens-auto break-all text-sm md:prose-base md:text-base">
+		<div class="card border-grey variant-soft-primary rounded-tl-none border">
+			<p
+				class="prose prose-sm mt-0 hyphens-auto break-all px-3 py-1 text-sm md:prose-base md:px-4 md:py-2 md:text-base"
+			>
 				<SvelteMarkdown source={message.content} />
 			</p>
 		</div>

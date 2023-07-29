@@ -12,13 +12,12 @@
 	// export let toggleChatInterface: () => void = () => {};
 	export let messageScrollNode: HTMLElement;
 
-
 	let showChatInterface: boolean = $nickname !== '';
 	let messages: Message[] = [];
 
 	$roomID = $page.url.pathname;
 
-	// console.log("chat begins")	
+	// console.log("chat begins")
 
 	const config = { appId: 'pChat-rooms' };
 	const room = joinRoom(config, $roomID);
@@ -48,7 +47,7 @@
 			type: 'status-left',
 			id: date.toISOString(),
 			sender: $nickname,
-			content: `${leaver?.name} has left the room`,
+			content: `${leaver?.name} left the room`,
 			timestamp: `${date.toTimeString().slice(0, 8)}`
 		};
 		pushMessageToMessageLog(newMessage);
@@ -70,7 +69,7 @@
 				type: 'status-joined',
 				id: date.toISOString(),
 				sender: otherProfile.name,
-				content: `${otherProfile.name} has joined the room`,
+				content: `${otherProfile.name} joined the room`,
 				timestamp: `${date.toTimeString().slice(0, 8)}`
 			};
 			pushMessageToMessageLog(newMessage);
@@ -89,9 +88,11 @@
 	});
 </script>
 
-
-<div bind:this={messageScrollNode} class="flex-1 bg-surface-500/30 p-4 pt-8 overflow-y-scroll">
-  <MessageFeed {messages} />
+<div
+	bind:this={messageScrollNode}
+	class="flex-1 overflow-y-scroll bg-surface-500/30 px-1 py-2 md:px-4 md:py-4"
+>
+	<MessageFeed {messages} />
 </div>
 
 <MessagePrompt sendMessageAction={sendMessage} {pushMessageToMessageLog} />
