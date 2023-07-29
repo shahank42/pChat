@@ -4,7 +4,7 @@
 
 	import { drawerStore, modalStore } from '@skeletonlabs/skeleton';
 
-	import { chatMode, gunRef, roomCreator, roomDeleted, roomID } from '$lib/stores/userStore';
+	import { chatMode, roomCreator, roomDeleted, roomID } from '$lib/stores/userStore';
 	import pChatLogo from '../svg/pChat.svg?url';
 
     
@@ -19,8 +19,6 @@
 
 	const destroyRoom = () => {
 		drawerStore.close();
-		$gunRef.get('feed').put(null);
-		$gunRef.get('destroy-room').put('yes');
 	};
 
 	const modal: ModalSettings = {

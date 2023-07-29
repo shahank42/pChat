@@ -1,14 +1,13 @@
 <script lang="ts">
 	import type { Message } from '../types/types';
 
-	import { nickname, gunRef, roomDeleted } from '$lib/stores/userStore';
+	import { nickname, roomDeleted } from '$lib/stores/userStore';
 
 	import sendIconUrl from '../svg/send-svgrepo-com.svg?url';
 	import type { ActionSender } from 'trystero';
 
   export let sendMessageAction: ActionSender<unknown>;
-	export let messages: Message[];
-	export let pushMessage: (newMessage: Message) => void;
+	export let pushMessageToMessageLog: (newMessage: Message) => void;
 	 
 	let currentMessage: string = '';
 
@@ -21,9 +20,8 @@
 				content: currentMessage,
 				timestamp: `${date.toTimeString().slice(0, 8)}`
 			};
-			// $gunRef.get('feed').get('messages').set(newMessage);
 			sendMessageAction(newMessage);
-			pushMessage(newMessage);
+			pushMessageToMessageLog(newMessage);
 			currentMessage = '';
 		}
 	};

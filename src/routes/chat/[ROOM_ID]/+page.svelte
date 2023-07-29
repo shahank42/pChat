@@ -1,14 +1,12 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
 	import type { Message, PageData, User } from '../../../types/types';
 
 	import { joinRoom, selfId } from 'trystero';
-	import Gun from 'gun/gun';
 	import { afterUpdate } from 'svelte';
 	import MessageFeed from '../../../components/MessageFeed.svelte';
 	import MessagePrompt from '../../../components/MessagePrompt.svelte';
 	import NicknamePrompt from '../../../components/NicknamePrompt.svelte';
-	import { nickname, roomID, gunRef, roomDeleted, roomCreator } from '$lib/stores/userStore';
+	import { nickname, roomID } from '$lib/stores/userStore';
 
 
 	export let data: PageData;
@@ -24,30 +22,8 @@
 		showChatInterface = true;
 	};
 
-	const gun = Gun({
-		peers: [
-			'https://pchat-relay-test.shahank.repl.co/gun',
-			// 'https://gun-manhattan.herokuapp.com/gun',
-			// 'https://relay.129.153.59.37.nip.io/gun',
-			// 'https://peer.wallie.io/gun',
-			// 'https://gundb-relay-mlccl.ondigitalocean.app/gun',
-		],
-	});
-
-	$gunRef = gun.get($roomID);
-
 	const config = { appId: 'pChat-rooms' };
 	const room = joinRoom(config, $roomID);
-
-	$gunRef.get('destroy-room').on((deleted) => {
-		$roomDeleted = deleted === 'yes' ? true : false;
-	});
-
-	let newUser: User = {
-		nickname: $nickname,
-		isCreator: $roomCreator == $nickname
-	};
-	$gunRef.get('users').set(newUser);
 
 
 	type PeerProfile = {
@@ -81,25 +57,13 @@
 		peerList = peerList.filter((peer) => peer.id != leaver?.id);
 	});
 
-	// if (!$roomDeleted) {
-	// 	$gunRef
-	// 		.get('feed')
-	// 		.get('messages')
-	// 		.map()
-	// 		.once((message: any) => {
-	// 			if (message) {
-	// 				messages = [...messages, message];
-	// 			}
-	// 		});
-	// }
-
 	getMessage((data, peerId) => {
 		let recievedMessage = data as Message;
 		// let sender = peerList.find((peer) => peer.id === peerId)?.name;
 		messages = [...messages, recievedMessage];
 	});
 
-	const pushMessage = (newMessage: Message) => {
+	const pushMessageToMessageLog = (newMessage: Message) => {
 		messages = [...messages, newMessage];
 	}
 
@@ -122,5 +86,5 @@
 </main>
 
 {#if showChatInterface}
-	<MessagePrompt sendMessageAction={sendMessage} messages={messages} pushMessage={pushMessage} />
+	<MessagePrompt sendMessageAction={sendMessage} {pushMessageToMessageLog} />
 {/if}
