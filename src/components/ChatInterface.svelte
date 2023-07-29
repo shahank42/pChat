@@ -5,7 +5,7 @@
 	import { afterUpdate } from 'svelte';
 	import MessageFeed from './MessageFeed.svelte';
 	import MessagePrompt from './MessagePrompt.svelte';
-	import { nickname, roomID } from '$lib/stores/userStore';
+	import { nickname, roomID, peerList } from '$lib/stores/userStore';
 	import { page } from '$app/stores';
 
 	// export let data: PageData;
@@ -25,7 +25,7 @@
 	const [sendProfile, getProfile] = room.makeAction('profile');
 	const [sendMessage, getMessage] = room.makeAction('message');
 
-	let peerList: Profile[] = [];
+	// let peerList: Profile[] = [];
 
 	let selfJoined = false;
 
@@ -41,7 +41,7 @@
 	});
 
 	room.onPeerLeave((peerId) => {
-		let leaver = peerList.find((peer) => peer.id === peerId);
+		let leaver = $peerList.find((peer) => peer.id === peerId);
 		const date = new Date();
 		let newMessage: Message = {
 			type: 'status-left',
@@ -52,7 +52,7 @@
 		};
 		pushMessageToMessageLog(newMessage);
 		selfJoined = false;
-		peerList = peerList.filter((peer) => peer.id != leaver?.id);
+		$peerList = $peerList.filter((peer) => peer.id != leaver?.id);
 	});
 
 	getMessage((data, peerId) => {
@@ -62,7 +62,9 @@
 
 	getProfile((data, peerId) => {
 		let otherProfile = data as Profile;
-		peerList = [...peerList, otherProfile];
+		// $peerList = [...$peerList, otherProfile];
+		$peerList.push(otherProfile);
+		$peerList = $peerList;
 		if (otherProfile.joined > profile.joined) {
 			const date = new Date();
 			let newMessage: Message = {
@@ -75,8 +77,6 @@
 			pushMessageToMessageLog(newMessage);
 		}
 	});
-
-	$: console.log(peerList);
 
 	const pushMessageToMessageLog = (newMessage: Message) => {
 		messages = [...messages, newMessage];
