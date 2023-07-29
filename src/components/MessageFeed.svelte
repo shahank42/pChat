@@ -5,6 +5,7 @@
 	import { nickname, roomDeleted } from '$lib/stores/userStore';
 
 	import roomDestroyedPic from '../svg/Destroyed room.svg?url';
+	import StatusBubble from './StatusBubble.svelte';
 
 	export let messages: Message[];
 </script>
@@ -30,10 +31,14 @@
 
 	{#if !$roomDeleted}
 		{#each messages as message}
-			{#if message.sender !== $nickname}
-				<MessageBubbleOther {message} />
+			{#if message.type === 'status-joined' || message.type === 'status-left'}
+					<StatusBubble {message} />
 			{:else}
-				<MessageBubbleSender {message} />
+				{#if message.sender !== $nickname}
+					<MessageBubbleOther {message} />
+				{:else}
+					<MessageBubbleSender {message} />
+				{/if}
 			{/if}
 		{/each}
 	{/if}

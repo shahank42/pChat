@@ -1,4 +1,5 @@
 export interface Message {
+	type: string;
 	id: string;
 	sender: string;
 	content: string;
@@ -13,3 +14,9 @@ export interface User {
 	nickname: string;
 	isCreator: boolean;
 }
+
+export interface Profile {
+	id: string;
+	name: string;
+	joined: number;
+};

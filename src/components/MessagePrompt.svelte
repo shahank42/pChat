@@ -15,6 +15,7 @@
 		if (currentMessage != '') {
 			const date = new Date();
 			let newMessage: Message = {
+				type: "message",
 				id: date.toISOString(),
 				sender: $nickname,
 				content: currentMessage,
