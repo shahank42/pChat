@@ -14,19 +14,29 @@
 	let showChatInterface: boolean = $nickname !== '';
 	let messageScrollNode: HTMLElement;
 
-
 	const toggleChatInterface = () => {
 		showChatInterface = true;
 	};
-	
 </script>
 
-<main class="flex flex-1 flex-col" >
+<main class="no-scrollbar flex flex-1 flex-col overflow-y-scroll">
 	{#if !showChatInterface}
 		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
 
 	{#if showChatInterface}
-		<ChatInterface {messageScrollNode}  />
+		<ChatInterface {messageScrollNode} />
 	{/if}
 </main>
+
+<style>
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+</style>
