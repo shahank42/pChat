@@ -1,4 +1,3 @@
-import type { IGunChain, IGunInstance } from 'gun';
 import { writable, type Writable } from 'svelte/store';
 
 export const nickname: Writable<string> = writable('');
