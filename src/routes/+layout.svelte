@@ -12,7 +12,7 @@
 	import Sidebar from '../components/Sidebar.svelte';
 </script>
 
-<div class="flex h-[100dvh] flex-col overflow-hidden md:mx-auto md:w-3/4 md:border-l md:border-r">
+<div class="flex h-[100dvh] flex-col overflow-hidden md:mx-auto md:w-3/4 max-w-4xl md:border-l md:border-r">
 	<Modal />
 
 	<Drawer>
