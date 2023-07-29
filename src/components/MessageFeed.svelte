@@ -10,7 +10,7 @@
 	export let messages: Message[];
 </script>
 
-<section class="w-full flex-1 space-y-3 p-4">
+<section class="w-full flex-1 space-y-3 px-4">
 	{#if $roomDeleted}
 		<div class="card">
 			<header class="card-header text-3xl">
