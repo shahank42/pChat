@@ -65,7 +65,7 @@
 				name="prompt"
 				id="prompt"
 				placeholder="Share your thoughts (markdown supported!)"
-				rows="2"
+				rows="1"
 			/>
 
 			<button class="variant-filled-primary w-14" on:click={sendMessage}>
