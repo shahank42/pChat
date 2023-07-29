@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { Message } from '../types/types';
 	import MessageBubbleOther from './MessageBubbles/MessageBubbleOther.svelte';
 	import MessageBubbleSender from './MessageBubbles/MessageBubbleSender.svelte';
 	import { nickname, roomDeleted } from '$lib/stores/userStore';
 
 	import roomDestroyedPic from '../svg/Destroyed room.svg?url';
 
-	export let messages: any;
+	export let messages: Message[];
 </script>
 
 <section class="w-full flex-1 space-y-3 p-4">

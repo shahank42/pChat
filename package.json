@@ -41,6 +41,7 @@
 		"font-awesome": "^4.7.0",
 		"gun": "^0.2020.1239",
 		"peerjs": "^1.4.7",
-		"svelte-markdown": "^0.2.3"
+		"svelte-markdown": "^0.2.3",
+		"trystero": "^0.13.0"
 	}
 }

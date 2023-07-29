@@ -2,7 +2,7 @@
 <script lang="ts">
 	import type { Message, PageData, User } from '../../../types/types';
 
-
+	import { joinRoom, selfId } from 'trystero';
 	import Gun from 'gun/gun';
 	import { afterUpdate } from 'svelte';
 	import MessageFeed from '../../../components/MessageFeed.svelte';
@@ -36,6 +36,9 @@
 
 	$gunRef = gun.get($roomID);
 
+	const config = { appId: 'pChat-rooms' };
+	const room = joinRoom(config, $roomID);
+
 	$gunRef.get('destroy-room').on((deleted) => {
 		$roomDeleted = deleted === 'yes' ? true : false;
 	});
@@ -46,16 +49,58 @@
 	};
 	$gunRef.get('users').set(newUser);
 
-	if (!$roomDeleted) {
-		$gunRef
-			.get('feed')
-			.get('messages')
-			.map()
-			.once((message: any) => {
-				if (message) {
-					messages = [...messages, message];
-				}
-			});
+
+	type PeerProfile = {
+		id: string;
+		name: string;
+		joined: number;
+	};
+
+	const [sendProfile, getProfile] = room.makeAction('profile');
+	const [sendMessage, getMessage] = room.makeAction('message');
+
+	const selfProfile: PeerProfile = {
+		id: selfId,
+		name: $nickname,
+		joined: Date.now()
+	};
+
+	let peerList: PeerProfile[] = [];
+
+	let selfJoined = false;
+
+	room.onPeerJoin((peerId) => {
+		sendProfile(selfProfile, peerId);
+		selfJoined = true;
+	});
+
+	room.onPeerLeave((peerId) => {
+		let leaver = peerList.find((peer) => peer.id === peerId);
+		// messageLog = [...messageLog, `${leaver?.name} has left`];
+		selfJoined = false;
+		peerList = peerList.filter((peer) => peer.id != leaver?.id);
+	});
+
+	// if (!$roomDeleted) {
+	// 	$gunRef
+	// 		.get('feed')
+	// 		.get('messages')
+	// 		.map()
+	// 		.once((message: any) => {
+	// 			if (message) {
+	// 				messages = [...messages, message];
+	// 			}
+	// 		});
+	// }
+
+	getMessage((data, peerId) => {
+		let recievedMessage = data as Message;
+		// let sender = peerList.find((peer) => peer.id === peerId)?.name;
+		messages = [...messages, recievedMessage];
+	});
+
+	const pushMessage = (newMessage: Message) => {
+		messages = [...messages, newMessage];
 	}
 
 	afterUpdate(() => {
@@ -71,11 +116,11 @@
 	
 	{#if showChatInterface}
 		<div class="flex-1 bg-surface-500/30 p-4 pt-8">
-			<MessageFeed {messages} />
+			<MessageFeed messages={messages} />
 		</div>
 	{/if}
 </main>
 
 {#if showChatInterface}
-	<MessagePrompt />
+	<MessagePrompt sendMessageAction={sendMessage} messages={messages} pushMessage={pushMessage} />
 {/if}
