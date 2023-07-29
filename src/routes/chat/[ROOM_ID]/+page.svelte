@@ -21,7 +21,7 @@
 	
 </script>
 
-<main class="flex flex-1 flex-col overflow-y-scroll" >
+<main class="flex flex-1 flex-col" >
 	{#if !showChatInterface}
 		<NicknamePrompt toJoinRoom {toggleChatInterface} />
 	{/if}
