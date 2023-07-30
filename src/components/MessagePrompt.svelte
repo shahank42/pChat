@@ -6,16 +6,17 @@
 	import sendIconUrl from '../svg/send-svgrepo-com.svg?url';
 	import type { ActionSender } from 'trystero';
 
-  export let sendMessageAction: ActionSender<unknown>;
+	export let sendMessageAction: ActionSender<unknown>;
 	export let pushMessageToMessageLog: (newMessage: Message) => void;
-	 
+
 	let currentMessage: string = '';
+	let textAreaRef: HTMLElement;
 
 	const sendMessage = () => {
 		if (currentMessage != '') {
 			const date = new Date();
 			let newMessage: Message = {
-				type: "message",
+				type: 'message',
 				id: date.toISOString(),
 				sender: $nickname,
 				content: currentMessage,
@@ -24,6 +25,7 @@
 			sendMessageAction(newMessage);
 			pushMessageToMessageLog(newMessage);
 			currentMessage = '';
+			textAreaRef.focus();
 		}
 	};
 
@@ -60,6 +62,7 @@
 			<!-- <button class="input-group-shim">+</button> -->
 
 			<textarea
+				bind:this={textAreaRef}
 				bind:value={currentMessage}
 				on:keydown={onPromptKeydown}
 				class="resize-none border-0 bg-transparent p-3 pl-6 ring-0"
