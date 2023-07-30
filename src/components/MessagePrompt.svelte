@@ -61,6 +61,7 @@
 
 			<textarea
 				bind:value={currentMessage}
+				on:keydown={onPromptKeydown}
 				class="resize-none border-0 bg-transparent p-3 pl-6 ring-0"
 				name="prompt"
 				id="prompt"
