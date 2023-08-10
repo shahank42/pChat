@@ -5,7 +5,14 @@
 	import { afterUpdate } from 'svelte';
 	import MessageFeed from './MessageFeed.svelte';
 	import MessagePrompt from './MessagePrompt.svelte';
-	import { nickname, roomID, peerList, joinVoiceChat } from '$lib/stores/userStore';
+	import {
+		nickname,
+		roomID,
+		peerList,
+		joinVoiceChat,
+		exitVoiceChat,
+		micOn
+	} from '$lib/stores/userStore';
 	import { page } from '$app/stores';
 
 	// export let data: PageData;
@@ -88,11 +95,21 @@
 	});
 
 	const peerAudios: any = {};
+
+	// get a local audio stream from the microphone
+	let selfStream: MediaStream;
+
+	$exitVoiceChat = async () => {
+		room.removeStream(selfStream as MediaStream);
+		selfStream.getTracks().forEach(function (track) {
+			track.stop();
+		});
+	};
+
 	$joinVoiceChat = async () => {
 		// this object can store audio instances for later
 
-		// get a local audio stream from the microphone
-		const selfStream = await navigator.mediaDevices.getUserMedia({
+		selfStream = await navigator.mediaDevices.getUserMedia({
 			audio: true,
 			video: false
 		});
@@ -101,7 +118,7 @@
 		room.addStream(selfStream);
 
 		// send stream to peers who join later
-		room.onPeerJoin((peerId) => room.addStream(selfStream, peerId));
+		room.onPeerJoin(async (peerId) => $micOn && room.addStream(selfStream as MediaStream, peerId));
 	};
 
 	// handle streams from other peers

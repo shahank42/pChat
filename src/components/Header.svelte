@@ -3,10 +3,12 @@
 
 	import { drawerStore } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
-	import { chatMode, joinVoiceChat, roomCreator } from '$lib/stores/userStore';
+	import { chatMode, exitVoiceChat, joinVoiceChat, roomCreator, micOn } from '$lib/stores/userStore';
 
 	import menuIconUrl from '../svg/hamburger-svgrepo-com.svg?url';
 	import pChatLogo from '../svg/pChat.svg?url';
+	import micOnUrl from '../svg/mic_on.svg?url';
+	import micOffUrl from '../svg/mic_off.svg?url';
 
 	const drawerSettings: DrawerSettings = {
 		id: 'sidebar',
@@ -17,6 +19,7 @@
 		padding: 'p-4',
 		rounded: 'rounded-xl'
 	};
+
 </script>
 
 <header
@@ -34,18 +37,30 @@
 	</button>
 
 	{#if $chatMode}
-		<button
-			on:click={() => {
-				$joinVoiceChat();
-			}}>join vc</button
-		>
-		<button
-			class="btn variant-filled-secondary"
-			on:click={() => {
-				drawerStore.open(drawerSettings);
-			}}
-		>
-			<img src={menuIconUrl} class="h-7 w-7" alt="menu" />
-		</button>
+		<div class="flex gap-7">
+			<button
+				class={`btn  ${!$micOn ? "variant-filled-tertiary" : "bg-green-500"}`}
+				on:click={() => {
+					console.log($micOn)
+					if (!$micOn) {
+						$joinVoiceChat();
+						$micOn = true;
+					} else {
+						$exitVoiceChat();
+						$micOn = false;
+					}
+				}}
+			>
+				<img src={$micOn ? micOnUrl : micOffUrl} class="h-5 w-5" alt="mic on" />
+			</button>
+			<button
+				class="btn variant-filled-secondary"
+				on:click={() => {
+					drawerStore.open(drawerSettings);
+				}}
+			>
+				<img src={menuIconUrl} class="h-7 w-7" alt="menu" />
+			</button>
+		</div>
 	{/if}
 </header>
