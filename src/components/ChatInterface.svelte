@@ -5,7 +5,7 @@
 	import { afterUpdate } from 'svelte';
 	import MessageFeed from './MessageFeed.svelte';
 	import MessagePrompt from './MessagePrompt.svelte';
-	import { nickname, roomID, peerList } from '$lib/stores/userStore';
+	import { nickname, roomID, peerList, joinVoiceChat } from '$lib/stores/userStore';
 	import { page } from '$app/stores';
 
 	// export let data: PageData;
@@ -86,6 +86,35 @@
 		if (messages)
 			messageScrollNode.scroll({ top: messageScrollNode.scrollHeight, behavior: 'smooth' });
 	});
+
+	$joinVoiceChat = async () => {
+		// this object can store audio instances for later
+		const peerAudios: any = {};
+
+		// get a local audio stream from the microphone
+		const selfStream = await navigator.mediaDevices.getUserMedia({
+			audio: true,
+			video: false
+		});
+
+		// send stream to peers currently in the room
+		room.addStream(selfStream);
+
+		// send stream to peers who join later
+		room.onPeerJoin((peerId) => room.addStream(selfStream, peerId));
+
+		// handle streams from other peers
+		room.onPeerStream((stream, peerId) => {
+			// create an audio instance and set the incoming stream
+			const audio = new Audio();
+			audio.srcObject = stream;
+			audio.autoplay = true;
+
+			// add the audio to peerAudio object if you want to address it for something
+			// later (volume, etc.)
+			peerAudios[peerId] = audio;
+		});
+	}
 </script>
 
 <div

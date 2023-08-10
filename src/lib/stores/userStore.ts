@@ -7,3 +7,4 @@ export const roomCreator: Writable<string> = writable('');
 export const roomDeleted: Writable<boolean> = writable(false);
 export const roomID: Writable<string> = writable('');
 export const peerList: Writable<Profile[]> = writable([]);
+export const joinVoiceChat: Writable<() => void> = writable();

@@ -3,7 +3,7 @@
 
 	import { drawerStore } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
-	import { chatMode, roomCreator } from '$lib/stores/userStore';
+	import { chatMode, joinVoiceChat, roomCreator } from '$lib/stores/userStore';
 
 	import menuIconUrl from '../svg/hamburger-svgrepo-com.svg?url';
 	import pChatLogo from '../svg/pChat.svg?url';
@@ -34,6 +34,11 @@
 	</button>
 
 	{#if $chatMode}
+		<button
+			on:click={() => {
+				$joinVoiceChat();
+			}}>join vc</button
+		>
 		<button
 			class="btn variant-filled-secondary"
 			on:click={() => {

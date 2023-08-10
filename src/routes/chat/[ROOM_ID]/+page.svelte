@@ -1,15 +1,7 @@
 <script lang="ts">
-	import type { Message, PageData, Profile } from '../../../types/types';
-
-	import { joinRoom, selfId } from 'trystero';
-	import { afterUpdate } from 'svelte';
-	import MessageFeed from '../../../components/MessageFeed.svelte';
-	import MessagePrompt from '../../../components/MessagePrompt.svelte';
 	import NicknamePrompt from '../../../components/NicknamePrompt.svelte';
 	import ChatInterface from '../../../components/ChatInterface.svelte';
-	import { nickname, roomID } from '$lib/stores/userStore';
-
-	export let data: PageData;
+	import { nickname } from '$lib/stores/userStore';
 
 	let showChatInterface: boolean = $nickname !== '';
 	let messageScrollNode: HTMLElement;
