@@ -23,7 +23,7 @@
 
 		<div class="card border-grey variant-soft-primary rounded-tl-none border">
 			<p
-				class="prose prose-sm mt-0 hyphens-auto break-all px-3 py-1 text-sm md:prose-base md:px-4 md:py-2 md:text-base"
+				class="prose text-white prose-sm mt-0 hyphens-auto break-all px-3 py-1 text-sm md:prose-base md:px-4 md:py-2 md:text-base"
 			>
 				<SvelteMarkdown source={message.content} />
 			</p>
