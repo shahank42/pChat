@@ -18,14 +18,14 @@
 
 > A quick, disposable and decentralized messaging app for the web.
 
-Made using [SvelteKit](https://kit.svelte.dev/), [SkeletonUI](https://www.skeleton.dev/), and [Gun.js](https://gun.eco/)
+Made using [SvelteKit](https://kit.svelte.dev/), [SkeletonUI](https://www.skeleton.dev/), and [Trystero](https://oxism.com/trystero/)
 
 ---
 
 # What is this?
 
 pChat provides a very privacy-centric messaging experience. Everything is stored in a decentralised database, no servers involved!
-Everyone using the app stores some part of the database with them, forming a peer-to-peer network. This is made possible with the help of GUN.js.
+Everyone using the app stores some part of the database with them, forming a peer-to-peer network. This is made possible with the help of Trystero.
 
 Try it out live at: https://pchat-chi.vercel.app
 
@@ -35,9 +35,9 @@ Try it out live at: https://pchat-chi.vercel.app
 - Create pChat rooms and use shareable links to invite members
 - Set a username to enter a pChat room
 - Send messages in the rooms (markdown fully supported!)
-- Room creators have the option to permanently destroy  pChat rooms
-- Destroyed pChat rooms cannot be accessed anymore
-- Works from any devic, be it desktop or mobile!
+- Rooms are persistent only as long as all members are present
+- If everyone leaves the room, then all messages are gone!
+- Works from any device, be it desktop or mobile!
 
 
 ---
@@ -46,7 +46,7 @@ Try it out live at: https://pchat-chi.vercel.app
 
 I really enjoyed making this app, and would love to hear feedback, criticism and different ways to enhance pChat.
 
-In fact, why not give do so through the [dedicated pChat room](https://pchat-chi.vercel.app/chat/8234g3ee713j1b1jaj9)  `^_^`
+In fact, why not give do so through the [dedicated pChat room](https://pchat-chi.vercel.app/chat/82k1e45ec850m4e0lo)  `^_^`
 
 Alternatively, contact can be made through e-mail (shounakghosh42@gmail.com) and Discord (https://discordapp.com/users/709289605580587008).
 
