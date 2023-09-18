@@ -3,7 +3,8 @@
 
 	import { drawerStore } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
-	import { chatMode, exitVoiceChat, joinVoiceChat, roomCreator, micOn } from '$lib/stores/userStore';
+	import { chatMode, roomCreator, micOn } from '$lib/stores/userStore';
+	import { joinVoiceChat, exitVoiceChat } from '$lib/chat';
 
 	import menuIconUrl from '../svg/hamburger-svgrepo-com.svg?url';
 	import pChatLogo from '../svg/pChat.svg?url';
@@ -43,10 +44,10 @@
 				on:click={() => {
 					console.log($micOn)
 					if (!$micOn) {
-						$joinVoiceChat();
+						joinVoiceChat();
 						$micOn = true;
 					} else {
-						$exitVoiceChat();
+						exitVoiceChat();
 						$micOn = false;
 					}
 				}}

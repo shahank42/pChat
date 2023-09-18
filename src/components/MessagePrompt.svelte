@@ -1,13 +1,12 @@
 <script lang="ts">
 	import type { Message } from '../types/types';
 
-	import { nickname, roomDeleted } from '$lib/stores/userStore';
+	import { messages, nickname, roomDeleted } from '$lib/stores/userStore';
 
 	import sendIconUrl from '../svg/send-svgrepo-com.svg?url';
 	import type { ActionSender } from 'trystero';
 
 	export let sendMessageAction: ActionSender<unknown>;
-	export let pushMessageToMessageLog: (newMessage: Message) => void;
 
 	let currentMessage: string = '';
 	let textAreaRef: HTMLElement;
@@ -23,7 +22,8 @@
 				timestamp: `${date.toTimeString().slice(0, 8)}`
 			};
 			sendMessageAction(newMessage);
-			pushMessageToMessageLog(newMessage);
+			$messages.push(newMessage)
+			$messages = $messages;
 			currentMessage = '';
 			textAreaRef.focus();
 		}
